@@ -58,7 +58,8 @@ button {
 	color: #FFFFFF;
 	text-transform: uppercase;
 	letter-spacing: 1px;
-	transition: transform 20ms ease-in;
+	transition: transform 5ms ease-in;
+    margin: 10px;
 }
 
 button:active {
