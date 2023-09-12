@@ -1,35 +1,52 @@
-const ERROR = document.getElementById("error");
-const FLU = document.getElementById("flu");
-const MAN = document.getElementById("man");
-const INPUT = document.getElementById("peso");
-const BOTON = document.getElementById("calcular");
+const CALCULAR = document.getElementById('calcular');
+const ERROR = document.getElementById('error');
+const FLU = document.getElementById('flu');
+const MAN = document.getElementById('man');
 
-BOTON.addEventListener("click", () => {
-  let peso = INPUT.value;
+CALCULAR.addEventListener('click', () => {
+    const DATO = document.getElementById('peso').value
+    //validamos que se cargue un dato:
+    if (DATO > 0){
+        ERROR.style.display = 'none'
+        let flujo = calcFlujo(DATO);
+        let mantenimiento = flujo/24;
+        let manteniMasMedioMant = mantenimiento + (mantenimiento / 2);
+        FLU.innerHTML = flujo + ' cc/hr';
+        MAN.innerHTML = Math.ceil(manteniMasMedioMant) + ' m+m/2 ' + Math.ceil(mantenimiento) + ' cc/hr';
+        FLU.style.display = 'block';
+        MAN.style.display = 'block';
+    } else {
+        ERROR.style.display = 'block';
+        FLU.style.display = 'none';
+        MAN.style.display = 'none';
+    }
+})
 
-  if (peso > 0){
-    ERROR.style.display = "none";
-    let res = holliday(peso);
-    console.log(res);
-  } else {
-    console.log("error")
-    ERROR.style.display = "block";
+
+
+function calcFlujo(peso){
+  let resto = peso;
+  let flujo = 0;
+  let manteniMasMedioMant = 0;
+  if (resto>20){
+      let aux = resto-20;
+      flujo += aux*20;
+      resto -= aux;
+  } 
+  if (resto>10){
+      let aux = resto-10;
+      flujo += aux*50;
+      resto -= aux;
   }
-});
-
-
-function holliday(peso){
-  let volumen;
-
-  if (peso <= 10) {
-    volumen = peso*100
-  } else if (peso >= 10 && peso <= 20) {
-    volumen = 1000 + (peso - 10)*50
-  } else {
-    volumen = 1500 + (peso - 20)*20
-  }
-  return volumen; 
+  flujo += resto*100;
+  return flujo;
 }
+
+
+
+
+
+
 
 
 
