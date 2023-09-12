@@ -6,16 +6,23 @@ const MAN = document.getElementById('man');
 CALCULAR.addEventListener('click', () => {
     const DATO = document.getElementById('peso').value
     //validamos que se cargue un dato:
-    if (DATO > 0){
+    if (DATO > 0 && DATO <= 30){
         ERROR.style.display = 'none'
         let flujo = calcFlujo(DATO);
         let mantenimiento = flujo/24;
         let manteniMasMedioMant = mantenimiento + (mantenimiento / 2);
         FLU.innerHTML = flujo + ' cc/hr';
-        MAN.innerHTML = Math.ceil(manteniMasMedioMant) + ' m+m/2 ' + Math.ceil(mantenimiento) + ' cc/hr';
+        MAN.innerHTML = Math.ceil(mantenimiento) + ' cc/hr ' + Math.ceil(manteniMasMedioMant) + ' m+m/2';
         FLU.style.display = 'block';
         MAN.style.display = 'block';
-    } else {
+    } else if (DATO > 30) {
+        let superficieCorpotal = ((DATO * 4) + 7) / (DATO + 90);
+        FLU.innerHTML = superficieCorpotal * 1500 + ' cc/hr';
+        MAN.innerHTML = superficieCorpotal * 2000 + ' cc/hr'; 
+        FLU.style.display = 'block';
+        MAN.style.display = 'block';
+    }
+      else {
         ERROR.style.display = 'block';
         FLU.style.display = 'none';
         MAN.style.display = 'none';
