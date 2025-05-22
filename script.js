@@ -11,14 +11,17 @@ CALCULAR.addEventListener('click', () => {
         let flujo = calcFlujo(DATO);
         let mantenimiento = flujo/24;
         let manteniMasMedioMant = mantenimiento + (mantenimiento / 2);
-        FLU.innerHTML = flujo + ' cc/hr';
-        MAN.innerHTML = Math.ceil(mantenimiento) + ' cc/hr ' + Math.ceil(manteniMasMedioMant) + ' m+m/2';
+        FLU.innerHTML = flujo.toFixed(2) + ' cc/hr';
+        MAN.innerHTML = mantenimiento.toFixed(2) + ' cc/hr ' + manteniMasMedioMant.toFixed(2) + ' m+m/2';
         FLU.style.display = 'block';
         MAN.style.display = 'block';
     } else if (DATO > 30) {
         let superficieCorpotal = ((DATO * 4) + 7) / (DATO + 90);
-        FLU.innerHTML = superficieCorpotal * 1500 + ' cc/hr';
-        MAN.innerHTML = superficieCorpotal * 2000 + ' cc/hr'; 
+        let vol1500 = superficieCorpotal * 1500;
+        let vol2000 = superficieCorpotal * 2000;
+
+        FLU.innerHTML = vol1500.toFixed(2) + ' cc/hr';
+        MAN.innerHTML = vol2000.toFixed(2) + ' cc/hr'; 
         FLU.style.display = 'block';
         MAN.style.display = 'block';
     }
